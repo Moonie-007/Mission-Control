@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>cozy little corner</title>
+ <link rel="preconnect" href="[Googleapis](https://fonts.googleapis.com")>
+ <link rel="preconnect" href="[Gstatic](https://fonts.gstatic.com") crossorigin>
+ <link href="[Googleapis](https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap") rel="stylesheet">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div class="floaties">
+ <span class="floaty deco-pink">🌸</span>
+ <span class="floaty deco-blue">🫧</span>
+ <span class="floaty deco-purple">✨</span>
+ <span class="floaty deco-green">🌿</span>
+ <span class="floaty deco-yellow">🌼</span>
+ <span class="floaty deco-peach">🍑</span>
+ <span class="floaty deco-pink">💗</span>
+ <span class="floaty deco-blue">🩵</span>
+ <span class="floaty deco-purple">🔮</span>
+ <span class="floaty deco-green">🍀</span>
+ </div>
+
+ <div class="container">
+ <div class="deco-row">
+ <span class="deco-pink">✿</span>
+ <span class="deco-yellow">✿</span>
+ </div>
+
+ <h1>🌸 C o z y E f f i c i e n c y 🌸</h1>
+
+ <div class="deco-row">
+ <span class="deco-pink">✿</span>
+ </div>
+
+ <div class="feature-grid">
+ <div class="feature-card card-1" onclick="toggleTodo()">
+ <span class="card-icon">📝</span>
+ <div class="card-title">to-do list</div>
+ <div class="card-desc">keep track of your tasks</div>
+ </div>
+ <div class="feature-card card-2" onclick="openHabitPopup()">
+ <span class="card-icon">📅</span>
+ <div class="card-title">habit tracker</div>
+ <div class="card-desc">build your routines</div>
+ </div>
+ <div class="feature-card card-3" onclick="openStopwatch()">
+ <span class="card-icon">⏱️</span>
+ <div class="card-title">stopwatch</div>
+ <div class="card-desc">time your focus sessions</div>
+ </div>
+ <div class="feature-card card-4">
+ <span class="card-icon">⏲️</span>
+ <div class="card-title">timer</div>
+ <div class="card-desc">countdown to your goals</div>
+ </div>
+ <div class="feature-card card-5">
+ <span class="card-icon">📖</span>
+ <div class="card-title">diary</div>
+ <div class="card-desc">write your thoughts</div>
+ </div>
+ </div>
+
+ <div class="todo-section" id="todo-section">
+ <div class="todo-header">
+ <input class="todo-input" id="todoInput" type="text" placeholder="Add a task..."/>
+ <button class="todo-add-btn" onclick="addTodo()">+add</button>
+ </div>
+ <ul class="todo-list" id="todoList"></ul>
+ <div class="todo-count" id="todoCount">0 tasks</div>
+ </div>
+
+ <div class="deco-row">
+ <span class="deco-yellow">✿</span>
+ <span class="deco-pink">✿</span>
+ </div>
+
+ <div class="footer">
+ ✦ made by Moonie-007 ✦
+ </div>
+ </div>
+
+ <div class="habit-overlay" id="habitOverlay" onclick="closeHabitPopup(event)">
+ <div class="habit-popup" onclick="event.stopPropagation()">
+ <button class="habit-close-btn" onclick="closeHabitPopup()">&times;</button>
+
+ <div class="bunny-area">
+ <span class="bunny" id="bunnyEmoji">🐇</span>
+ <div class="streak-display">
+ <span class="streak-fire">🔥</span>
+ <span class="streak-number" id="streakCount">0</span>
+ <span class="streak-label">day streak</span>
+ </div>
+ <div class="bunny-message" id="bunnyMessage">Start your first habit!</div>
+ </div>
+
+ <div class="habit-form">
+ <input type="text" id="habitInput" placeholder="New habit..." maxlength="40">
+ <button id="addHabitBtn">➕</button>
+ </div>
+
+ <ul class="habit-list" id="habitList"></ul>
+
+ <button class="habit-reset-btn" id="resetHabitsBtn">🗑️Reset all</button>
+ </div>
+ </div>
+
+ <div class="stopwatch-overlay" id="stopwatchOverlay" onclick="closeStopwatch(event)">
+ <div class="stopwatch-popup" onclick="event.stopPropagation()">
+ <button class="stopwatch-close-btn" onclick="closeStopwatch()">&times;</button>
+ <div class="stopwatch-title">⏱️ Stopwatch</div>
+ <div class="stopwatch-display" id="stopwatchDisplay">00:00:00</div>
+ <div class="stopwatch-controls">
+ <button class="sw-btn sw-start" id="swStartBtn" onclick="startStopwatch()">▶ Start</button>
+ <button class="sw-btn sw-lap" id="swLapBtn" onclick="lapStopwatch()" disabled>⏱️ Lap</button>
+ <button class="sw-btn sw-reset" id="swResetBtn" onclick="resetStopwatch()">↺ Reset</button>
+ </div>
+ <ul class="lap-list" id="lapList"></ul>
+ </div>
+ </div>
+
+//timer//
+
+<div class="timer-overlay" id="timerOverlay" onclick="closeTimer(event)">
+ <div class="timer-popup" onclick="event.stopPropagation()">
+ <button class="timer-close-btn" onclick="closeTimer()">&times;</button>
+ <div class="timer-title">⏲️ Timer</div>
+ 
+ <div class="timer-setup" id="timerSetup">
+ <div class ="timer-inputs">
+ <div>
+ <label>Min</label>
+ <input type="number" id="timerMinutes" value="25" min="0" max="99">
+ </div> 
+ <div>
+ <label>Sec</label>
+ <input type="number" id="timerSeconds" value="0" min="0" max="59">
+ </div>
+ </div>
+ <button class="timer-start-btn" onclick="beginTimer()">▶ Start Timer</button>
+
+
+ <div class="timer-running" id="timerRunning" style="display: none;">
+ <div class ="timer-display" id="timerDisplay">25:00</div>
+ <div class="timer-controls">
+ <button class="sw-btn sw-start" id="timerPauseBtn" onclick="pauseTimer()">⏸ Pause</button>
+ <button class="sw-btn sw-reset" onclick="stopTimer">⏹ Stop</button>
+ </div>
+ </div>
+
+ <div class="timer-done" id="timerDone" style="display: none;">
+ <div class="timer-done-icon">🔔></div>
+ <button class="timer-done-text">Time's up!</div>
+ <button class="sw-btn sw-reset" onclick="resetTimer()">↺ Set Again</button>
+ </div>
+ </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script src="script.js"></script>
+
+</body>
+</html>
